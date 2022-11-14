@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if forms.errors %}
+        <p>Your Password or Username are Wrong</p>
+    {% endif %}
+
+    {% if next %}
+    
+        {% if user.isauthenticated %}
+        
+            <p> Sorry, You don't have access to this site</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log in</button>
+        <a href="{% url 'users_regs:Register' %}">Not a User?</a>
+      </form>
+{% endblock content %}
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block metas %}{% endblock metas %}
+        <title>{% block title %}{% endblock title %}</title>
+        {% block links %}{% endblock links %}
+    </head>
+    <body>
+        {% block content-before-bar %}{% endblock content-before-bar %}
+        <nav>
+            {% block content-inbar-front %}{% endblock content-inbar-front %}
+            <a href="">Home</a>
+            {% block content-inbar-middle1 %}{% endblock content-inbar-middle1 %}
+            <a href="">Add</a>
+            {% block content-inbar-middle2 %}{% endblock content-inbar-middle2 %}
+            <a href="">User menu</a>
+            <a href="{% url 'logout' %}">Log out</a>
+            {% block content-inbar-bottom %}{% endblock content-inbar-bottom %}
+            
+        </nav>
+        {% block content-after-bar %}{% endblock content-after-bar %}
+        <div>
+            <div>
+                <form action='/search/' method='POST'>
+                    {% csrf_token %}
+                    <label for="search-bar">Search:</label>
+                    <input id="search-bar" name="search-bar" value="{{ val }}" type="text">
+                    <label for="model">On:</label>
+                    <select name="model" id="model">
+                        <option value="C">Clientes</option>
+                        <option value="B">Libros</option>
+                        <option value="A">Autores</option>
+                    </select>
+                    <button type="submit">ok</button>
+                </form>
+            {% block content-after-form %}{% endblock content-after-form %}
+            </div>
+            {% block content-2 %}{% endblock content-2 %}
+        </div>
+        {% block content-3 %}{% endblock content-3 %}
+</html>

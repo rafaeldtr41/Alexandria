@@ -1,0 +1,32 @@
+{% extends 'Customer/base_home.html' %}
+
+{% block title %}
+    Search
+{% endblock title %}
+
+{% block content-2 %}
+<div>
+    {% if search is not None %}
+    {% for val in search %}
+        
+        {% if class == 'C' %}
+
+            <a href='{% url 'Customer:customerview' val.id %}'> 
+                {{ val.first_name}} {{ val.last_name }}</a>
+        {% elif  class == 'B' %}
+
+            <a href='{% url 'Books:bookview' val.id %}'> {{ val.name }}</a>
+        {% elif class == 'A' %}
+                
+            <a href='{% url 'Books:authorview' val.id %}'> 
+                    {{ val.first_name }} {{ val.last_name }}</a>
+        
+        {% endif %}
+    {% endfor %}
+    {% else %}
+        <p> No hay resultados que mostrar</p>
+    {% endif %}
+
+{% endblock content-2 %}
+</body>
+</html>

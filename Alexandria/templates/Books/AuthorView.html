@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ val.first_name}}, {{val.last_name}}
+{% endblock title %}
+
+{% block content %}
+
+    <div>
+
+        {% for book in Books %}
+
+            <a href="{% url 'Books:bookview' book.id %}" >{{ book.name }}</a>
+        {% endfor %}
+    </div>
+{% endblock content %}

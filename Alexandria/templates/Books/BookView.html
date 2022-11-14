@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    {{ val.name }}
+{% endblock title %}
+
+{% block content %}
+    <div>
+        {% for custom  in Cust %}
+            <a href="{% url 'Customer:customerview' custom.id %}"> {{ custom.first_name}}, 
+                {{ custom.last_name}}</a>
+        {% endfor %}
+    </div>
+{% endblock content %}
