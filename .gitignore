@@ -1,5 +1,6 @@
-/venv/*
+venv/
 /.vscode/*
 .env
 migrations/
 media/
+__pycache__/

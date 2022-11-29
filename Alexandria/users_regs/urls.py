@@ -9,11 +9,11 @@ from django.conf.urls.static import static
 app_name = 'users_regs'
 urlpatterns = [
     
-   path('register', views.register.as_view(), name='Register'),
-   path('register/add_info', views.AddInfo.as_view(), name='add_info'),
+   path('register', views.register, name='Register'),
    path('register/add_lib', views.AddLibraryUser, name='add_libuser'),
-   path('register/confirm', views.ConfirmEmail.as_view(), name='confirm_mail'),
-   path('register/send', views.sender, name='Mail')
+   path('register/confirm', views.ConfirmEmail, name='confirm_mail'),
+   path('register/send', views.sender, name='Mail'),
+   path('login', views.Login_view, name='login')
 
 ]
 

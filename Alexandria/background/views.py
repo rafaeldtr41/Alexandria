@@ -1,15 +1,18 @@
 from django.shortcuts import render
-from django.core.mail import send_mail
-from django.conf import settings
-from django.urls import reverse
-from django.shortcuts import redirect
-from django.utils import timezone
-import random
+from django.views import generic
+from django.template import loader
 
 
 
 
+def View_404(request):
 
+    return render(request, 'error/404.html', {'user':request.user.is_authenticated})
+
+
+def View_403(request):
+
+    return render(request, 'error/404.html', {'user':request.user.is_authenticated})
 
 
 """

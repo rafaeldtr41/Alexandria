@@ -7,17 +7,22 @@ from django.contrib.auth.models import User
 
 
 
-class UserRegTest(TestCase):
+class RedirectsTest(TestCase):
 
     def setUp(self):
        
-        User.objects.create(username='pablo1', password='12345678')
+        self.user = User.objects.create_user(username='pablo1', password='12345678', 
+        email='fakemail@fakemail.fm')
         self.c = Client()
+        
+    def tearDown(self):
+
+        self.user.delete()
         
 
     def test_redirect_from_login_to_create(self):
 
-        response = self.client.get(reverse('/accounts/login'))
+        response = self.client.get(reverse('users_regs:login'))
         response.client.get(reverse('users_regs:Register'))
         self.assertEqual(response.status_code, 200)
 
@@ -25,58 +30,89 @@ class UserRegTest(TestCase):
 
         self.c = Client()
         self.c.login(username='pablo1', password='12345678')
-        response = self.c.get(reverse('accounts/login'))
-        self.assertEqual(response.status_code, 300)
+        response = self.c.get(reverse('users_regs:login'))
+        self.assertRedirects(response, '/error/403')
 
-    def test_go_from_login_to_add_info(self):
-
-        self.c.get(reverse('accounts/login'))
-        response = self.c.get(reverse('users_regs:add_info'))
-        self.assertEqual(response.status_code, 300)
 
     def test_go_from_login_to_add_libuser(self):
 
-        self.c.get(reverse('accounts/login'))
-        response = self.c.get(reverse('users_regs:add_info'))
-        self.assertEqual(response.status_code, 300)
+        self.c.get(reverse('users_regs:login'))
+        response = self.c.get(reverse('users_regs:add_libuser'))
+        self.assertRedirects(response, '/error/403')
 
     def test_go_from_login_to_Mail(self):
 
-        self.c.get(reverse('accounts/login'))
+        self.c.get(reverse('users_regs:login'))
         response = self.c.get(reverse('users_regs:Mail'))
-        self.assertEqual(response.status_code, 300)
+        self.assertRedirects(response, '/error/403')
 
     def test_go_from_home_to_Mail(self):
 
         self.c.login(username='pablo1', password='12345678')
-        self.c.get(reverse(''))
+        self.c.get(reverse('Prestamos:home'))
         response = self.c.get(reverse('users_regs:Mail'))
-        self.assertEqual(response.status_code, 300)
+        self.assertRedirects(response, '/error/403')
     
     def test_go_from_home_to_add_libuser(self):
 
         self.c.login(username='pablo1', password='12345678')
-        self.c.get(reverse(''))
+        self.c.get(reverse('Prestamos:home'))
         response = self.c.get(reverse('users_regs:add_libuser'))
-        self.assertEqual(response.status_code, 300)
+        self.assertRedirects(response, '/error/403')
 
-    def test_go_from_home_to_add_info(self):
-
-        self.c.login(username='pablo1', password='12345678')
-        self.c.get(reverse(''))
-        response = self.c.get(reverse('users_regs:add_info'))
-        self.assertEqual(response.status_code, 300)
 
     def test_go_from_home_to_create(self):
 
         self.c.login(username='pablo1', password='12345678')
-        self.c.get(reverse(''))
-        response = self.c.get(reverse('users_regs:register'))
-        self.assertEqual(response.status_code, 300)
+        self.c.get(reverse('Prestamos:home'))
+        response = self.c.get(reverse('users_regs:Register'))
+        self.assertRedirects(response, '/error/403')
     
     def test_go_from_home_to_add_login(self):
 
         self.c.login(username='pablo1', password='12345678')
-        self.c.get(reverse(''))
-        response = self.c.get(reverse('accounts/login'))
-        self.assertEqual(response.status_code, 300)
+        self.c.get(reverse('Prestamos:home'))
+        response = self.c.get(reverse('users_regs:login'))
+        self.assertRedirects(response, '/error/403')
+
+
+class LoginTest(TestCase):
+
+    def setUp(self):
+
+        self.user = User.objects.create_user(username='pablo1', password='12345678', 
+        email='correofalso@correofalso.cf')
+        self.c = Client()
+
+    def tearDown(self) -> None:
+        
+        self.user.delete()
+
+    def test_login_user_exist(self):
+
+        response = self.c.post('/login', {'username': 'pablo1',
+         'password': '12345678'})
+        return self.assertRedirects(response, '/')
+
+    def test_login_user_not_exist(self):
+
+        response = self.c.post('/login', {'username': 'django66666666666666666666',
+         'password': 'looooooooooooool'})
+        return self.assertRedirects(response, '/login')
+
+    def test_login_user_wrong_user(self):
+
+        response = self.c.post('/login', {'username': 'django6666666666666666666666',
+         'password': '12345678'})
+        return self.assertRedirects(response, '/login')
+
+    def test_login_user_wrong_password(self):
+
+        response = self.c.post('/login', {'username': 'pablo1',
+         'password': 'yyyyyyyyyyyyyyyyyyyyyy'})
+        return self.assertRedirects(response, '/login')
+
+
+class EmailTest(TestCase):
+
+    pass

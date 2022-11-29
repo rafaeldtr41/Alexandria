@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.views import generic
-from .forms import search_form
-from .models import Customer, CustomerFilter, Prestamo
+from .forms import search_home
+# from .models import Customer, CustomerFilter, Prestamo
 from Books.models import Book, Author, AuthorFilter
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,6 +16,7 @@ from django.contrib.auth import logout
 class Home(LoginRequiredMixin, generic.TemplateView):
 
     template_name = 'Customer/index.html'
+    login_url = 'users_regs:login'
 
 
 class Search(LoginRequiredMixin, generic.ListView):
@@ -31,7 +32,7 @@ def search_view(request):
     clase = ''
     if request.method == 'POST':
 
-        form = search_form(request.POST)
+        form = search_home(request.POST)
         if form.is_valid():
 
             if form.fields['table'] == 'C': #Customer Search
@@ -54,7 +55,7 @@ def search_view(request):
 
 class CustomerView(LoginRequiredMixin, generic.DetailView):
 
-    model = Customer
+    # model = Customer
     template_name = 'Customer/CustomView.html'
 
     def get_context_data(self, **kwargs):

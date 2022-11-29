@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
 from .models import Book, Author, Category
-from Prestamos.models import Customer, Prestamo
+# from Prestamos.models import Customer, Prestamo
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 

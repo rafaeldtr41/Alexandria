@@ -2,31 +2,39 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import LibreriaUser
+from django.utils import timezone
 
 
 
 
-class UserForm(UserCreationForm):
+class UserForm(forms.ModelForm):
 
-    email = forms.EmailField(required=True)
+    password1 = forms.CharField(widget=forms.PasswordInput())
+    password2 = forms.CharField(widget=forms.PasswordInput())    
 
     class Meta:
 
         model = User
         fields = (
             "username",
-            'password1',
-            'password2',
+            "first_name",
+            "last_name",
+            "email",
         )
     
     def save(self, commit=True):
 
         user = super(UserForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
+        user.date_joined = timezone.now()
+        user.is_staff = False
+        user.is_active = False
+        user.is_superuser = False
+        user.last_login = timezone.now()
+        user.password = self.cleaned_data['password1']
         if commit:
 
             user.save()
-        return user
+        return user.username
     
     
 class LibraryUserForm(forms.ModelForm):
@@ -67,3 +75,9 @@ class UserFormSInfo(forms.Form):
 class ConfirmEmail(forms.Form):
 
     code = forms.CharField(max_length=6, required=True)
+
+
+class Login(forms.Form):
+
+    username = forms.CharField(max_length=150, required=True)
+    password = forms.CharField(widget=forms.PasswordInput())
