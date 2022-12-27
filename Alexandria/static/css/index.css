@@ -1,0 +1,12 @@
+body {
+    
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#Enviar {
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+}

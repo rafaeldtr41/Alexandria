@@ -1,24 +1,63 @@
-{% extends 'base.html' %}
+{% load static%}
+<!doctype html>
+<html lang="en">
 
-{% block content %}
+<head>
+    <title>Bienvenido a la Biblioteca</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-    {% if forms.errors %}
-        <p>Your Password or Username are Wrong</p>
-    {% endif %}
+    <link rel="stylesheet" href="{% static '/bootstrap archivos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style-index.css' %}">
 
-    {% if next %}
-    
-        {% if user.isauthenticated %}
-        
-            <p> Sorry, You don't have access to this site</p>
-        {% endif %}
-    {% endif %}
+</head>
 
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Log in</button>
-        <a href="{% url 'users_regs:Register' %}">Not a User?</a>
-      </form>
-{% endblock content %}
 
+<body background="{% static 'pexels-photo-3747511.jpeg' %} ">
+    <section class="ftco-section ">
+        <div class="container ">
+            <div class="row justify-content-center ">
+                <div class="col-md-6 text-center mb-5 ">
+                    <h2 class="heading-section ">Sistema de Gestion Bibliotecaria</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center ">
+                <div class="col-md-6 col-lg-4 ">
+                    <div class="login-wrap p-0 ">
+
+                        <form class="signin-form " method="POST">
+                        {% csrf_token %}
+                            <div class="form-group ">
+                                {{ form.username }}
+                                </div>
+                            <div class="form-group">
+                                {{ form.password }}
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password "></span>
+                            </div>
+                            <div class="form-group">
+                                <button class="form-control btn btn-primary submit px-3" type="submit">Entrar</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50 text-md-right">
+                                    <a href="/colorlib-search-15/index.html " style="color: #fff ">Olvidaste la contraseña</a>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{% static '/bootstrap archivos/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %} "></script>
+    <script src="{% static 'js/popper.js' %} "></script>
+    <script src="{% static 'js/bootstrap.min.js' %} "></script>
+    <script src="{% static 'js/main.js' %} "></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+
+</html>

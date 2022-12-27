@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from .models import LibreriaUser
 from django.utils import timezone
 
@@ -77,7 +77,26 @@ class ConfirmEmail(forms.Form):
     code = forms.CharField(max_length=6, required=True)
 
 
-class Login(forms.Form):
+class Login(AuthenticationForm):
 
-    username = forms.CharField(max_length=150, required=True)
-    password = forms.CharField(widget=forms.PasswordInput())
+    def __init(self, *args, **kwargs):
+
+        super(AuthenticationForm, self).__init__(*args, **kwargs)
+
+
+    username = UsernameField(widget=forms.TextInput(
+        attrs={
+            'type':"text",
+            'id':"name",
+            'class':"form-control",
+            'placeholder':"Usuario",
+        }
+    ))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'id':"password",
+            'type':"password",
+            'class':"form-control",
+            'placeholder':"Contraseña",
+        }
+    ))

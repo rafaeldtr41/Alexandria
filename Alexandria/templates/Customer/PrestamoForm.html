@@ -1,0 +1,37 @@
+{% extends 'base_form.html' %}
+{% load static %}
+
+{% block title %}
+ Agnadir Prestamo
+{% endblock title %}
+
+{% block Content %}
+
+    <h2 class="title">Agnadir Prestamo</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="row row-space">
+                        
+                            <div class="input-group">
+                                <label class="label">Libros</label>
+                                <div class=" js-select-simple select--no-search">
+                                    {{ form.books }}
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>    
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">cantidad</label>
+                                    {{ form.cant }}
+                                </div>
+                            </div>
+                            
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                        </div>
+                    </form>
+
+{% endblock Content %}
+           

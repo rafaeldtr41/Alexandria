@@ -1,0 +1,27 @@
+.varcolor {
+    background-color: #2B2E2C !important;
+}
+
+.nav-link {
+    color: aliceblue !important;
+}
+
+.nav-link:hover {
+    background-color: aliceblue !important;
+    color: #2B2E2C!important;
+    transition: 0.5s;
+}
+
+.cerrar {
+    color: #DF4E18!important;
+    transition: 0.5s;
+}
+
+.cerrar:hover {
+    background-color: #DF4E18 !important;
+    color: aliceblue !important;
+}
+
+.fs-4 {
+    color: #DF4E18 !important;
+}

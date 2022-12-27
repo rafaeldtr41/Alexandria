@@ -8,8 +8,8 @@ app_name = 'Books'
 urlpatterns = [
     
     
-    path('Author/<int:pk>/', views.AuthorView.as_view(), name='authorview'),
-    
+    path('listbook', views.book_list.as_view(), name='listbook'),
+    path('bookdetail/<int:pk>', views.BookView.as_view(),name='bookdetail'),
 
 ]
 

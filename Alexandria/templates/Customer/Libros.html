@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/Libros.css' %}">
+    <link rel="stylesheet" href="{% static '/bootstrap archivos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/Librostyle.css' %}">
+    <title>Libros</title>
+</head>
+
+<body>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 varcolor var">
+
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4">SGB</span>
+        </a>
+
+        <ul class="nav nav-pills">
+                <li class="buton-nav"><a href="{% url 'Prestamos:home' %} " class="nav-link" aria-current="page">Inicio</a></li>
+                <li class="buton-nav"><a href="{% url 'Prestamos:addc' %}" class="nav-link">Clientes</a></li>
+                <li class="buton-nav"><a href="{% url 'Books:listbook' %} " class="nav-link">Libros</a></li>
+                <li class="buton-nav "><a href="{% url 'users_regs:logout' %}" class="nav-link cerrar">Cerrar Sesion</a></li>
+        </ul>
+    </header>
+
+    <div class="content">
+
+        <div class="container">
+            <h2 class="mb-5">Lista de Libros</h2>
+
+
+            <div class="table-responsive custom-table-responsive">
+
+                <table class="table custom-table">
+                    <thead>
+                        <tr>
+                  <div class="control__indicator"></div>
+                </label>
+                            </th>
+
+                            <th scope="col">Orden</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Fecha de Publicacion</th>
+                            <th scope="col">Cantidad de Ejemplares</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% if booklist %}
+
+                            {% for i in booklist %}
+
+                                <tr scope="row">
+                                    
+                                    <div class="control__indicator"></div>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td><a href="{% url 'Books:bookdetail' i.id %} ">{{ i.name }}</a></td>
+                                    <td>{{ i.author }}</td>
+                                    <td>{{ i.release_date }}</td>
+                                    <td>{{ i.cant_ejemplares }}</td>
+                                    
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+
+                        <h1> No Hay ningun libro :( </h1>
+                        {% endif %}
+                        
+                    </tbody>
+                </table>
+                
+            </div>
+
+
+        </div>
+
+    </div>
+    <script src="{% static 'bootstrap archivos/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

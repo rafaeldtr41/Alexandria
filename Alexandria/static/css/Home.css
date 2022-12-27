@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    opacity: 0.5;
+}
+
+.var {
+    position: relative;
+}
+
+.search {
+    top: 6px;
+    left: 10px;
+}
+
+.form-control {
+    border: none;
+    padding-left: 32px;
+}
+
+.form-control:focus {
+    border: none;
+    box-shadow: none;
+}
+
+img {
+    width: 8%;
+}
+
+.card {
+    --bs-card-bg: none;
+    --bs-card-border-color: none;
+}
+
+.varcolor {
+    background-color: #2B2E2C !important;
+}
+
+.nav-link {
+    color: aliceblue;
+}
+
+.nav-link:hover {
+    background-color: aliceblue;
+    color: #2B2E2C;
+    transition: 0.5s;
+}
+
+.cerrar {
+    color: #DF4E18;
+    transition: 0.5s;
+}
+
+.cerrar:hover {
+    background-color: #DF4E18;
+    color: aliceblue;
+}
+
+#formulario {
+    border-radius: 40px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border: #2B2E2C 3px solid;
+    background-color: transparent;
+    border-right: transparent;
+}
+
+textarea:focus,
+#formulario:focus {
+    size: 20px;
+    color: #000000;
+}
+
+#formulario,
+select,
+textarea {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #000;
+}
+
+.fs-4 {
+    color: #DF4E18;
+}
+
+#boton {
+    font-family: Verdana;
+    color: #2B2E2C;
+    border: #2B2E2C 3px solid;
+    border-left: 0px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    background-color: transparent;
+}
+
+.table {
+    display: grid!important;
+    grid-template-columns: 100%;
+    justify-items: center!important;
+}
+
+.cabesal {
+    width: 50em;
+    height: 3em;
+    display: grid!important;
+    grid-template-columns: 5% 30% 30% 30% 5%;
+    align-self: center !important;
+}
+
+.cliente {
+    width: 50em;
+    height: 3em;
+    display: grid;
+    grid-template-columns: 5% 30% 30% 30% 5%;
+    align-self: center !important;
+    border: white 1px solid!important;
+    background-color: #2B2E2C !important;
+}
+
+.col1 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    justify-content: center;
+}
+
+.col2 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.col3 {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.buton {
+    background-color: #2B2E2C !important;
+}

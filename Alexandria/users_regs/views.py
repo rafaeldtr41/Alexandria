@@ -3,17 +3,17 @@ from django.template import loader
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.utils import timezone
 from django.core.mail import send_mail
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .models import ConfirmedEmails
 from . import forms
-from . import models
 import datetime
-import os
 import random
 
 
@@ -67,7 +67,6 @@ def ConfirmEmail(request):
     if request.META.get('HTTP_REFERER') == '/register/send' and 'username' in dict and not request.user.is_authenticated:
         
         user = User.objects.get(username=dict['username'])
-
         if user is not None:
         
             if request.method == 'POST' and user is not None:
@@ -123,28 +122,18 @@ def sender(request):
     return redirect('background:403')
 
 
-def Login_view(request):
+class Login_View(LoginView):
 
-    if not request.user.is_authenticated:
+    form_class = forms.Login
+    success_url = reverse_lazy('Prestamos:home')
+    template_name = 'registration/login.html'
 
-        if request.method == 'POST':
 
-            form = forms.Login(request.POST)
+login_required
+def Logout(request):
 
-            if form.is_valid():
+    if request.user.is_authenticated:
 
-                user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+        logout(request)
+        return redirect('users_regs:login')
 
-                if user is not None:
-
-                    login(request, user)
-                    messages.success(request, 'redireccionando')
-                    return redirect('Prestamos:home')
-                
-                messages.error(request, 'Usuario o contraseña incorrecta')
-                return redirect('users_regs:login')
-
-        form = forms.Login()
-        return render(request, 'registration/login.html', {'form':form})
-
-    return redirect('background:403')

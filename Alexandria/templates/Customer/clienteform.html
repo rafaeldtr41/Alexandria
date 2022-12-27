@@ -1,0 +1,67 @@
+{% extends "base_form.html" %}
+{% load static %}
+
+{% block title %}
+    Agnadir cliente
+{% endblock title %}
+
+
+{% block Content %}
+
+    <h2 class="title">Agnadir Cliente </h2>
+                    
+                    <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                        <div class=" row-space">
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="form-label text-black m-1" for="customFile2">Choose file</label>
+                                    {{ form.foto }}
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">nombre</label>
+                                    {{ form.nombre }}
+                                </div>
+                            
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">apellidos</label>
+                                    {{ form.apellidos }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Carnet de Identidad</label>
+                                    {{ form.CI }}
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">solapin</label>
+                                    {{ form.solapin }}
+                                </div>
+                            </div>
+                        
+                        <div class="input-group">
+                            <label class="label">Facultad</label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                {{ form.facultad }}
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Aceptar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+{% endblock Content %}
+                    

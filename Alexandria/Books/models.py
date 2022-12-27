@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Q
-import django_filters
+
 
 
 
@@ -9,7 +9,11 @@ class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_birth = models.DateField()
-    death_birth = models.DateField(default=None)
+    date_death = models.DateField(default=None)
+
+    def __str__(self):
+        
+        return self.first_name + ' ' + self.last_name
 
     def class_type(self):
 
@@ -40,21 +44,6 @@ class Book(models.Model):
 
         return 'Book'
 
+    def __str__(self):
 
-class AuthorFilter(django_filters.FilterSet):
-
-    class Meta:
-        
-        model = Author
-        fields = [
-
-            'first_name',
-            'last_name',
-
-        ]
-
-        def custom_filter(self, queryset, name, value):
-
-            return queryset.filter(
-                Q(first_name__icontains=value) | Q(last_name__icontains=value)
-            )
+        return self.name

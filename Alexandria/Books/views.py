@@ -3,35 +3,32 @@ from django.template import loader
 from .models import Book, Author, Category
 # from Prestamos.models import Customer, Prestamo
 from django.views import generic
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from Prestamos.models import prestamo
 
 
 
 
-@login_required
-
-class BookView(generic.DetailView):
+class BookView(LoginRequiredMixin, generic.DetailView):
 
     model = Book
     template_name =  'Books/BookView.html'
 
     def get_context_data(self, **kwargs):
         
-        dict = super().get_context_data(**kwargs)
-        aux = Prestamo.objects.only('Customer').filter(Book=self.object.id)
-        aux = Customer.objects.filter(id__in=aux)
-        dict['Cust'] = aux
+        dict  = super().get_context_data(**kwargs)
+        try:
+            dict['prestamo'] = prestamo.objects.filter(books=self.object, devuelto=False)
+        except prestamo.DoesNotExist:
+            dict['mensaje'] = "No hay prestamos :("
         return dict
 
 
-class AuthorView(generic.DetailView):
+class book_list(LoginRequiredMixin , generic.ListView):
+    
+    template_name = 'Customer/Libros.html'
+    context_object_name= 'booklist'
 
-    model = Author
-    template_name = "Book/AuthorView.html"
+    def get_queryset(self):
 
-    def get_context_data(self, **kwargs):
-        
-        context = super().get_context_data(**kwargs)
-        aux = Book.objects.filter(author=self.object.id)
-        context["Books"] = aux 
-        return context    
+        return Book.objects.all().order_by('-cant_prestado')

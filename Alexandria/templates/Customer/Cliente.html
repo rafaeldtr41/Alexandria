@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/bootstrap archivos/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/Cliente.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Cliente</title>
+</head>
+
+<body>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 varcolor var">
+        <a href="{% url 'Prestamos:home' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4">SGB</span>
+        </a>
+
+        <ul class="nav nav-pills">
+                <li class="buton-nav"><a href="{% url 'Prestamos:home' %} " class="nav-link" aria-current="page">Inicio</a></li>
+                {% comment "IMP" %}
+                    Arregla los links q estos no se ni a dond pinga tienen que ir
+                {% endcomment %}
+                <li class="buton-nav"><a href="{% url 'Prestamos:addc' %}" class="nav-link">Clientes</a></li>
+                <li class="buton-nav"><a href="{% url 'Books:listbook' %} " class="nav-link">Libros</a></li>
+                <li class="buton-nav "><a href="{% url 'users_regs:logout' %}" class="nav-link cerrar">Cerrar Sesion</a></li>
+            </ul>
+    </header>
+    <div class="card ">
+        <div class="card-body">
+            <h5 class="card-title">{{ object.nombre }}</h5>
+            <img src="{{ object.foto.url }}">
+            <p class="card-text">Apellidos: {{ object.apellidos }}</p>
+            <p class="card-text">Facultad: {{ object.facultad }}</p>
+            <p class="card-text">#Solapin: {{ object.solapin }}</p>
+            <a class=" buton2 btn btn-dark active " role="button"  aria-pressed="true" href="{% url 'Prestamos:addprestamo' %}">Añadir Prestamo</a>
+        </div>
+    </div>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Libros Prestados</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID no.</th>
+                                    <th>Nombre</th>
+                                    <th>Fecha de pedido</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+        
+
+                            <tbody>
+
+                                {% if datos %}
+
+                                    {% for i in datos %}
+
+                                        <tr class="alert" role="alert" id="{{ forloop.counter }}">
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>{{ i.books }}</td>
+                                            <td> {{ i.date }}</td>
+                                            <td>
+                                                <a href="{% url 'Prestamos:delprestamo' i.id %}" class="close"  aria-label="Close">
+                                                eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+
+                                {% else %}
+
+                                    <h1> {{ mensaje}}</h1>
+                                {% endif %}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'bootstrap archivos/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/Home.js' %}"></script>
+    <script src="{% static '/js/cliente.js' %}"></script>
+</body>
+
+</html>

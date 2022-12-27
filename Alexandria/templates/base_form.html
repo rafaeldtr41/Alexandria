@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>{% block title %}
+    
+    {% endblock title %}</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'bootstrap2/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'bootstrap2/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'bootstrap2/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'bootstrap2/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Menu BAR CSS-->
+    <link rel="stylesheet" href="{% static '/bootstrap archivos/css/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="{% static '/css/Home.css' %} ">
+    
+    <!-- Main CSS-->
+    <link href="{% static 'bootstrap2/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+
+   
+<body>
+
+ <div class="contain">
+ 
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 varcolor var">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                <span class="fs-4">SGAB</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="buton-nav"><a href="{% url 'Prestamos:home' %} " class="nav-link" aria-current="page">Inicio</a></li>
+                {% comment "IMP" %}
+                    Arregla los links q estos no se ni a dond pinga tienen que ir
+                {% endcomment %}
+                <li class="buton-nav"><a href="/Lista-usuarios.html" class="nav-link">Clientes</a></li>
+                <li class="buton-nav"><a href="/Libros.html" class="nav-link">Libros</a></li>
+                <li class="buton-nav "><a href="/index.html" class="nav-link cerrar">Cerrar Sesion</a></li>
+            </ul>
+        </header>
+    
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                {% block Content %}
+                
+                {% endblock Content %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'bootstrap2/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'bootstrap2/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'bootstrap2/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'bootstrap2/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'bootstrap2/js/global.js' %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

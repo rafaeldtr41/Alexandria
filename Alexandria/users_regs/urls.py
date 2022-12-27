@@ -13,7 +13,8 @@ urlpatterns = [
    path('register/add_lib', views.AddLibraryUser, name='add_libuser'),
    path('register/confirm', views.ConfirmEmail, name='confirm_mail'),
    path('register/send', views.sender, name='Mail'),
-   path('login', views.Login_view, name='login')
+   path('login', views.Login_View.as_view(), name='login'),
+   path('logout/', views.Logout, name='logout'),
 
 ]
 

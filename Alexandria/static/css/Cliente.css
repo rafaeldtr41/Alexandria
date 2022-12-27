@@ -1,0 +1,61 @@
+img {
+    width: 12%;
+}
+
+.varcolor {
+    background-color: #2B2E2C !important;
+}
+
+.nav-link {
+    color: aliceblue;
+}
+
+.nav-link:hover {
+    background-color: aliceblue;
+    color: #2B2E2C;
+    transition: 0.5s;
+}
+
+.cerrar {
+    color: #DF4E18;
+    transition: 0.5s;
+}
+
+.cerrar:hover {
+    background-color: #DF4E18;
+    color: aliceblue;
+}
+
+.fs-4 {
+    color: #DF4E18;
+}
+
+.card {
+    width: 100%;
+}
+
+.card-body {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: 25% 25% 25% 15%
+}
+
+.card-body img {
+    width: 70%;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 5;
+}
+
+.buton1 {
+    width: 15em;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.buton2 {
+    width: 15em;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}

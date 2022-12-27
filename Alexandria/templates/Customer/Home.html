@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static '/bootstrap archivos/css/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="{% static '/css/Home.css' %} ">
+
+</head>
+
+<body>
+    <div class="contain">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 varcolor var">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                <span class="fs-4">SGAB</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="buton-nav"><a href="{% url 'Prestamos:home' %} " class="nav-link" aria-current="page">Inicio</a></li>
+                {% comment "IMP" %}
+                    Arregla los links q estos no se ni a dond pinga tienen que ir
+                {% endcomment %}
+                <li class="buton-nav"><a href="{% url 'Prestamos:addc' %}" class="nav-link">Clientes</a></li>
+                <li class="buton-nav"><a href="{% url 'Books:listbook' %} " class="nav-link">Libros</a></li>
+                <li class="buton-nav "><a href="{% url 'users_regs:logout' %}" class="nav-link cerrar">Cerrar Sesion</a></li>
+            </ul>
+        </header>
+
+        <body class="hm-gradient" background="{% static '/assets/img/background/pexels-pixabay-267586.jpg' %} ">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <!-- Grid row -->
+                    <div class="row justify-content-center">
+                        <!-- Grid column -->
+                        <div class="col-md-8 ">
+                            <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Sistema de Gestion Bibliotecaria</h2>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="search-bar" placeholder="Escribir nombre del cliente" aria-label="Recipient's username" aria-describedby="button-addon2" oninput="search()">
+                                <button class="btn btn-outline-secondary" id="boton" onclick="search()">Buscar Clientes</button>
+                            </div>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <div class="list-group" id="resultado">
+                        <table class="table" id="elements">
+                            <thead>
+                                <tr class="cabezal">
+                                    <th>&nbsp;</th>
+                                    <th class="col1">Nombre</th>
+                                    <th class="col2">Apellidos</th>
+                                    <th class="col3">#Solapin</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% if cliente_list %}
+                                
+                                {% for i in cliente_list %}
+
+                                    
+                                
+                                    <tr class="cliente" id="{{ forloop.counter }}" >
+                                    
+                                        <th id="tab{{ forloop.counter }}">&nbsp;</th>
+                                        <th class="col1" style="color:white;" id="nam{{ forloop.counter }}"><a href=" {% url 'Prestamos:dcliente' i.id %}">{{ i.nombre }}</a></th>
+                                        <th class="col2" style="color:white;" id="apel{{ forloop.counter }}">{{ i.apellidos }}</th>
+                                        <th class="col3" style="color:white;" id="sol{{ forloop.counter }}">{{ i.solapin }}</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                
+                            
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <script src="{% static 'bootstrap archivos/js/bootstrap.min.js' %} "></script>
+                <script src="{% static '/js/bootstrap.min.js' %} "></script>
+                <script src="{% static '/js/Home.js' %} "></script>
+        </body>
+
+</html>
